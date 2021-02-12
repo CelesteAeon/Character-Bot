@@ -1,4 +1,5 @@
 const { Client } = require('discord.js');
+const connection = require('../mongo.js');
 
 module.exports = class CharacterBotClient extends Client {
 
