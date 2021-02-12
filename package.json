@@ -10,12 +10,9 @@
     "type": "git",
     "url": "https://github.com/CelesteAeon/Character-Bot.git"
   },
-  "homepage": {
-    "url": "https://github.com/CelesteAeon/Character-Bot#readme"
-  },
+  "homepage": "https://github.com/CelesteAeon/Character-Bot#readme",
   "bugs": {
-    "url": "https://github.com/CelesteAeon/Character-Bot/issues",
-    "email": "nikiharper6666@gmail.com"
+    "url": "https://github.com/CelesteAeon/Character-Bot/issues"
   },
   "keywords": [
     "Character",
@@ -24,8 +21,7 @@
   ],
   "author": "Celeste Aeon",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/CelesteAeon/Character-Bot/issues"
-  },
-  "homepage": "https://github.com/CelesteAeon/Character-Bot#readme"
+  "dependencies": {
+    "mongodb": "^3.6.4"
+  }
 }
