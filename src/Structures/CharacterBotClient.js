@@ -1,4 +1,5 @@
-const { Client } = require('discord.js');
+const { Client, Collection, Permissions } = require('discord.js');
+const Util = require('./Util.js');
 const connection = require('../mongo.js');
 
 module.exports = class CharacterBotClient extends Client {
@@ -9,30 +10,15 @@ module.exports = class CharacterBotClient extends Client {
 		});
 		this.validate(options);
 
-		this.once('ready', () => {
-			console.log(`Logged in as ${this.user.username}!`);
-		});
+		this.commands = new Collection();
 
-		this.on('message', async (message) => {
-			const mentionRegex = RegExp(`^<@!${this.user.id}>$`);
-			const mentionRegexPrefix = RegExp(`^<@!${this.user.id}> `);
+		this.aliases = new Collection();
 
-			if (!message.guild || message.author.bot) return;
+		this.events = new Collection();
 
-			if (message.content.match(mentionRegex)) message.channel.send(`My prefix for ${message.guild.name} is \`${this.prefix}\`.`);
+		this.utils = new Util(this);
 
-			const prefix = message.content.match(mentionRegexPrefix) ?
-				message.content.match(mentionRegexPrefix)[0] : this.prefix;
-			
-			if(!message.content.startsWith(prefix)) return;
-
-			// eslint-disable-next-line no-unused-vars
-			const [cmd, ...args] = message.content.slice(prefix.length).trim().split(/ +/g);
-
-			if (cmd.toLowerCase() === 'hello') {
-				message.channel.send('Hello!');
-			}
-		});
+		this.owners = options.owners;
 	}
 
 	validate(options) {
@@ -44,10 +30,16 @@ module.exports = class CharacterBotClient extends Client {
 		if (!options.prefix) throw new Error('You must pass a prefix for the client.');
 		if (typeof options.prefix !== 'string') throw new TypeError('Prefix should be a type of String.');
 		this.prefix = options.prefix;
+		
+		if (!options.defaultPerms) throw new Error('You must pass default perm(s) for the Client.');
+		this.defaultPerms = new Permissions(options.defaultPerms).freeze();
 	}
 
-	async login(token = this.token) {
-		super.login(token);
+	async start(token = this.token) {
+		this.utils.loadCommands();
+		this.utils.loadEvents();
+		
+		await super.login(token);
 	}
 
 };
