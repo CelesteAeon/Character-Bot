@@ -1,0 +1,31 @@
+{
+  "name": "character-bot",
+  "version": "1.0.0",
+  "description": "Character creation bot for Discord.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CelesteAeon/Character-Bot.git"
+  },
+  "homepage": {
+    "url": "https://github.com/CelesteAeon/Character-Bot#readme"
+  }
+  "bugs": {
+    "url": "https://github.com/CelesteAeon/Character-Bot/issues",
+    "email": "nikiharper6666@gmail.com"
+  },
+  "keywords": [
+    "Character",
+    "Discord",
+    "Bot"
+  ],
+  "author": "Celeste Aeon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CelesteAeon/Character-Bot/issues"
+  },
+  "homepage": "https://github.com/CelesteAeon/Character-Bot#readme"
+}
