@@ -1,10 +1,10 @@
-const MongoClient = require('mongodb').MongoClient;
-const mongoURI = require('./mongo.json').mgUri;
+const mongoose = require('mongoose');
+const cfg = require('../config.json');
+const mongoURI = cfg.mgUri;
 
-MongoClient.connect(mongoURI, { useUnifiedTopology: true }, function(err, db) {
-    if(!err) {
-        console.log("We are connected!")
-    } else if(err) {
+mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
+    if(err) {
         throw err;
-    }
-}  );
+    } else if(!err) {
+    console.log("We are connected!")};
+});
