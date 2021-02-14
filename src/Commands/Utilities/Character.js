@@ -52,51 +52,40 @@ module.exports = class extends Command {
         
         if(args[0] === "edit"){
             
-        message.reply("Which character would you like to edit?");
+                message.reply("Which character would you like to edit?");
 
-            message.channel.awaitMessages(m => m.author.id == message.author.id,
-                    {max: 1, time: 30000}).then(collected => {
+                    message.channel.awaitMessages(m => m.author.id == message.author.id,
+                            {max: 1, time: 30000}).then(collected => {
 
-                        let input = collected.first(),conent;
+                                let input = collected.first().content;
 
-                        Character.findOne({ name: input,}, (err, bores) => {
+                                Character.findOne({ name: input,}, (err, bores) => {
 
-                        message.reply("What is " + bores.name + "'s Last Name?");
-
-                        message.channel.awaitMessages(m => m.author.id == message.author.id,
-                                {max: 1, time: 30000}).then(collected => {
-
-                                    let lname = collected.first().content;
-
-                                bores.lastname = lname;
-                                bores.save().then(bores => console.log(bores)).catch(err => console.log(err));
-                                message.reply("Name Updated!")
-                        /*then(bores =>
-                              
-                              if(err) console.log(err)
-                             
-                                message.reply("What is " + bores.name + "'s Gender?");
+                                message.reply("Which option would you like to edit?");
 
                                 message.channel.awaitMessages(m => m.author.id == message.author.id,
-                                        {max: 1, time: 30000}).then(collected => {
+                                        {max: 1, time: 30000}).then(selected => {
 
-                                            let gender = collected.first().content;
+                                    const select = selected;
 
-                                        bores.gender = gender;
+                                message.reply("Go ahead and input your information.");
+
+                                message.channel.awaitMessages(m => m.author.id == message.author.id,
+                                        {max: 1, time: 30000}).then(data => {
+
+                                        bores.select = data;
                                         bores.save().then(bores => console.log(bores)).catch(err => console.log(err));
-                                        message.reply("Gender Updated!");
+                                        message.reply("Information Updated!")
 
-                                })
-                              
-                             ).catch(err => console.log(err))*/
+                                }) 
 
-                        }) 
-                            
+                        })
+
+                    })
+
                 })
-
-            })
-                                
-    }
+            
+        }
 
 if(args[0] === "show"){
     
